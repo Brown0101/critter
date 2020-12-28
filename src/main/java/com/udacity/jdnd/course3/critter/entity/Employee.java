@@ -1,4 +1,4 @@
-package com.udacity.jdnd.course3.critter.data;
+package com.udacity.jdnd.course3.critter.entity;
 
 import com.udacity.jdnd.course3.critter.user.EmployeeSkill;
 
@@ -11,12 +11,17 @@ public class Employee {
 
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
 
     @Column(name = "name", length = 100)
     private String name;
-    @ManyToMany(fetch = FetchType.LAZY)
+
+    @ElementCollection
+    @Column(name = "skills", length = 255)
     private Set<EmployeeSkill> skills;
+
+    @ElementCollection
+    @Column(name = "days_available", length = 255)
     private Set<DayOfWeek> daysAvailable;
 
     public Employee(String name, Set<EmployeeSkill> skills, Set<DayOfWeek> daysAvailable) {

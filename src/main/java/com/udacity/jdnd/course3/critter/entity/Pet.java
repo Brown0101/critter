@@ -1,10 +1,8 @@
-package com.udacity.jdnd.course3.critter.data;
+package com.udacity.jdnd.course3.critter.entity;
 
 import com.udacity.jdnd.course3.critter.pet.PetType;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
@@ -12,30 +10,35 @@ public class Pet {
 
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
+
     private PetType type;
     private String name;
-    private long ownerId;
+    private Long ownerId;
     private LocalDate birthDate;
     private String notes;
 
-    public Pet(PetType type, String name, long ownerId, LocalDate birthDate, String notes) {
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Customer customer;
+
+    public Pet(PetType type, String name, Long ownerId, LocalDate birthDate, String notes, Customer customer) {
         this.type = type;
         this.name = name;
         this.ownerId = ownerId;
         this.birthDate = birthDate;
         this.notes = notes;
+        this.customer = customer;
     }
 
     public Pet() {
 
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -55,11 +58,11 @@ public class Pet {
         this.name = name;
     }
 
-    public long getOwnerId() {
+    public Long getOwnerId() {
         return ownerId;
     }
 
-    public void setOwnerId(long ownerId) {
+    public void setOwnerId(Long ownerId) {
         this.ownerId = ownerId;
     }
 
@@ -77,5 +80,13 @@ public class Pet {
 
     public void setNotes(String notes) {
         this.notes = notes;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 }
