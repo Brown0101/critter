@@ -63,6 +63,10 @@ public class Customer {
         this.notes = notes;
     }
 
+    public void addPet(Pet pet) {
+        this.petIds.add(pet);
+    }
+
     public List<Pet> getPetIds() {
         return petIds;
     }

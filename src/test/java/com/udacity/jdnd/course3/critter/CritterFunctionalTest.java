@@ -56,7 +56,11 @@ public class CritterFunctionalTest {
     public void testCreateEmployee(){
         EmployeeDTO employeeDTO = createEmployeeDTO();
         EmployeeDTO newEmployee = userController.saveEmployee(employeeDTO);
+        System.out.println("Before Retrieve!");
+        System.out.println(newEmployee.getName());
+        System.out.println(newEmployee.getId());
         EmployeeDTO retrievedEmployee = userController.getEmployee(newEmployee.getId());
+        System.out.println(retrievedEmployee.getId());
         Assertions.assertEquals(employeeDTO.getSkills(), newEmployee.getSkills());
         Assertions.assertEquals(newEmployee.getId(), retrievedEmployee.getId());
         Assertions.assertTrue(retrievedEmployee.getId() > 0);

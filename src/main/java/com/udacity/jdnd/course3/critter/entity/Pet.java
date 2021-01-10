@@ -4,6 +4,7 @@ import com.udacity.jdnd.course3.critter.pet.PetType;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Entity
 public class Pet {
