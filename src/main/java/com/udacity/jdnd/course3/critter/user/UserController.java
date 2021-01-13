@@ -35,7 +35,7 @@ public class UserController {
 
         // Create a new customer object
         // convert the dto to customer in order to save it.
-        Customer customer = customerService.save(this.convertCustomerDTOtoCustomer(customerDTO));
+        Customer customer = this.customerService.save(this.convertCustomerDTOtoCustomer(customerDTO));
 
         // We need an id for reference of the object we just saved
         // to use with our DTO
@@ -67,8 +67,8 @@ public class UserController {
     @PostMapping("/employee")
     public EmployeeDTO saveEmployee(@RequestBody EmployeeDTO employeeDTO) {
         Employee employee = convertEmployeeDTOtoEmployee(employeeDTO);
-        this.employeeService.save(employee);
-        employeeDTO.setId(employee.getId());
+        Employee savedEmployee = this.employeeService.save(employee);
+        employeeDTO.setId(savedEmployee.getId());
 
         return employeeDTO;
     }

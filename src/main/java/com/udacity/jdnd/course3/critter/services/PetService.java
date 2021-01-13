@@ -22,16 +22,17 @@ public class PetService {
     }
 
     // Allows us to save our new pet added by controller
-    public Pet save(Pet pet, Long customerId) {
-        Pet addPet = new Pet();
-        String message = String.format("Customer does not exist for id %s that was provided.", customerId);
-        Customer customer = this.customerRepository.findById(customerId).orElseThrow(()-> new NoDataFoundForRequest(message));
-        pet.setOwnerId(customer.getId());
-        addPet = this.petRepository.save(pet);
-        customer.addPet(addPet);
-        this.customerRepository.save(customer);
+    public Pet save(Pet pet) {
+        if (pet.getCustomer() != null) {
+            Customer customer = pet.getCustomer();
+            customer.addPet(pet);
+            this.customerRepository.save(customer);
+        }
 
-        return addPet;
+        System.out.println("Saving content!");
+        Pet newPet =  this.petRepository.save(pet);
+
+        return newPet;
     }
 
     // We are abel to find our pets by an ID provided.

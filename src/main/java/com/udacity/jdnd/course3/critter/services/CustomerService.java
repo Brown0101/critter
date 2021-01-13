@@ -1,10 +1,12 @@
 package com.udacity.jdnd.course3.critter.services;
 
 import com.udacity.jdnd.course3.critter.entity.Customer;
+import com.udacity.jdnd.course3.critter.entity.Pet;
 import com.udacity.jdnd.course3.critter.exceptions.NoDataFoundForRequest;
 import com.udacity.jdnd.course3.critter.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -27,6 +29,12 @@ public class CustomerService {
     // Save our customer object to our database and return the object.
     public Customer save(Customer customer) {
         return this.customerRepository.save(customer);
+    }
+
+    public Customer getCustomer(Long id) {
+        String message = String.format("No Customer id %s found.", id);
+
+        return customerRepository.findById(id).orElseThrow(() -> new NoDataFoundForRequest(message));
     }
 
     // Find owner using pet id.
