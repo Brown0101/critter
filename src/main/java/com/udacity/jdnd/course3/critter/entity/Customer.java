@@ -1,6 +1,7 @@
 package com.udacity.jdnd.course3.critter.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -72,6 +73,10 @@ public class Customer {
     }
 
     public void setPetIds(List<Pet> petIds) {
+
+        if(petIds == null) {
+            petIds = new ArrayList<>();
+        }
         this.petIds = petIds;
     }
 }

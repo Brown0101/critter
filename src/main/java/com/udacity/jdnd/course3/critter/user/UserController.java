@@ -11,6 +11,7 @@ import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Handles web requests related to Users.
@@ -108,6 +109,10 @@ public class UserController {
     private CustomerDTO convertCustomerToCustomerDTO(Customer customer) {
         CustomerDTO customerDTO = new CustomerDTO();
         BeanUtils.copyProperties(customer, customerDTO);
+
+        if(customer.getPetIds() != null) {
+            customerDTO.setPetIds(customer.getPetIds().stream().map(pet -> pet.getId()).collect(Collectors.toList()));
+        }
 
         return customerDTO;
     }

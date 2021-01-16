@@ -23,16 +23,11 @@ public class PetService {
 
     // Allows us to save our new pet added by controller
     public Pet save(Pet pet) {
-        if (pet.getCustomer() != null) {
-            Customer customer = pet.getCustomer();
-            customer.addPet(pet);
-            this.customerRepository.save(customer);
-        }
+        Pet returnedPet = petRepository.save(pet);
+        Customer customer = returnedPet.getCustomer();
+        customer.addPet(returnedPet);
 
-        System.out.println("Saving content!");
-        Pet newPet =  this.petRepository.save(pet);
-
-        return newPet;
+        return returnedPet;
     }
 
     // We are abel to find our pets by an ID provided.
