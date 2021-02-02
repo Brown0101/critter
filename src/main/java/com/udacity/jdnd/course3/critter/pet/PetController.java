@@ -26,7 +26,7 @@ public class PetController {
         this.customerService = customerService;
     }
 
-    @PostMapping("/{petId}")
+    @PostMapping
     public PetDTO savePet(@RequestBody PetDTO petDTO) {
         Pet pet = this.petService.save(this.convertPetDTOToPet(petDTO));
         return convertPetToPetDTO(pet);
