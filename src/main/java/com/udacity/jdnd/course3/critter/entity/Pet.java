@@ -22,13 +22,19 @@ public class Pet {
     @ManyToOne(cascade = CascadeType.ALL)
     private Customer customer;
 
-    public Pet(PetType type, String name, Long ownerId, LocalDate birthDate, String notes, Customer customer) {
+    @ManyToOne
+    @JoinColumn(name = "pet_schedule", nullable = true)
+    private Schedule schedule;
+
+    public Pet(PetType type, String name, Long ownerId, LocalDate birthDate,
+               String notes, Customer customer, Schedule schedule) {
         this.type = type;
         this.name = name;
         this.ownerId = ownerId;
         this.birthDate = birthDate;
         this.notes = notes;
         this.customer = customer;
+        this.schedule = schedule;
     }
 
     public Pet() {
@@ -89,5 +95,13 @@ public class Pet {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    public Schedule getSchedule() {
+        return schedule;
+    }
+
+    public void setSchedule(Schedule schedule) {
+        this.schedule = schedule;
     }
 }

@@ -24,21 +24,26 @@ public class Employee {
     @Column(name = "days_available", length = 255)
     private Set<DayOfWeek> daysAvailable;
 
-    public Employee(String name, Set<EmployeeSkill> skills, Set<DayOfWeek> daysAvailable) {
+    @ManyToOne
+    @JoinColumn(name = "employee_schedule", nullable = true)
+    private Schedule schedule;
+
+    public Employee(String name, Set<EmployeeSkill> skills, Set<DayOfWeek> daysAvailable, Schedule schedule) {
         this.name = name;
         this.skills = skills;
         this.daysAvailable = daysAvailable;
+        this.schedule = schedule;
     }
 
     public Employee() {
 
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -64,5 +69,13 @@ public class Employee {
 
     public void setDaysAvailable(Set<DayOfWeek> daysAvailable) {
         this.daysAvailable = daysAvailable;
+    }
+
+    public Schedule getSchedule() {
+        return schedule;
+    }
+
+    public void setSchedule(Schedule schedule) {
+        this.schedule = schedule;
     }
 }
