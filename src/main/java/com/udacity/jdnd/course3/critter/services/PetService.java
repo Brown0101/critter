@@ -10,8 +10,10 @@ import java.util.List;
 import java.util.Optional;
 
 import com.udacity.jdnd.course3.critter.exceptions. NoDataFoundForRequest;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class PetService {
     private final PetRepository petRepository;
     private final CustomerRepository customerRepository;
